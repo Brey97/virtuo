@@ -20,6 +20,8 @@ const cars = [{
   'pricePerKm': 0.45
 }];
 
+
+
 //list of current rentals
 //useful for ALL steps
 //the time is hour
@@ -83,6 +85,50 @@ const rentals = [{
     'virtuo': 0
   }
 }];
+
+//step1
+
+for each (var rental in rentals){
+  for each (var car in cars){
+    if(rental.carId == car.id){
+      rental.price = (car.pricePerDay * (rental.returnDate - rental.pickupDate)) + (rental.distance * car.pricePerKm)
+    }
+  }
+
+}
+
+//step2
+
+for each (var rental in rentals){
+  for each (var car in cars){
+    if(rental.carId == car.id){
+      rental.price = (car.pricePerDay * (rental.returnDate - rental.pickupDate)) + (rental.distance * car.pricePerKm)
+    }
+    if((rental.returnDate - rental.pickupDate)>1 && (rental.returnDate - rental.pickupDate) <4){
+      rental.price = rental.price*0.9
+    }
+    if((rental.returnDate - rental.pickupDate)>4 && (rental.returnDate - rental.pickupDate) <10){
+      rental.price = rental.price*0.7
+    }
+    if((rental.returnDate - rental.pickupDate)>9){
+      rental.price = rental.price*0.5
+    }
+  }
+
+}
+
+//step3
+
+for each (var car in cars){
+  for each (var rental in rentals){
+    if(rental.carId == car.id){
+      rental.commission = rental.price * 0.3
+      rental.insurance = 0.5 * rental.commission
+      rental.treasury = 1 * (rental.returnDate - rental.pickupDate)
+      rental.virtuo = rental.commission - ( rental.insurance + rental.treasury)
+    }
+  }
+}
 
 //list of actors for payment
 //useful from step 5
