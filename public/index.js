@@ -130,6 +130,23 @@ for each (var car in cars){
   }
 }
 
+//step4
+
+for each (var rental in rentals){
+  for each (var car in cars){
+    if(rental.carId == car.id){
+      rental.price = (car.pricePerDay * (rental.returnDate - rental.pickupDate)) + (rental.distance * car.pricePerKm)
+      if(rental.deductibleReduction == true){
+        rental.price = rental.price + ((rental.returnDate - rental.pickupDate)*4)
+      }
+    }
+  }
+
+}
+//step5
+
+
+
 //list of actors for payment
 //useful from step 5
 const actors = [{
