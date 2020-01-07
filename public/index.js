@@ -143,12 +143,15 @@ for each (var rental in rentals){
 }
 //step5
 for each (var rental in rentals){
-  for each (var car in cars){
-    for each (var actor in actors){
+  for each (var actor in actors){
+    if(actor.rentalId == rental.id){
+      debit = rental.price
 
-
+      if(rental.deductibleReduction == true){
+        actor.virtuo = rental.virtuo
       }
     }
+
   }
 }
 
