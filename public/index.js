@@ -88,14 +88,14 @@ const rentals = [{
 
 //step1
 
-for each (var rental in rentals){
-  for each (var car in cars){
-    if(rental.carId == car.id){
-      rental.price = (car.pricePerDay * (rental.returnDate - rental.pickupDate)) + (rental.distance * car.pricePerKm)
+for (var i = 0; i < rentals.length; i++){
+  for (var j = 0; j < cars.length; j++){
+    if(rentals[i].id == car[j].id){
+      rentals[i].price = (car[j].pricePerDay * (rentals[i].returnDate - rentals[i].pickupDate)) + (rentals[i].distance * car[j].pricePerKm)
     }
   }
-
 }
+
 
 //step2
 
