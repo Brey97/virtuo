@@ -122,16 +122,23 @@ for (var i = 0; i < rentals.length; i++){
 for (var i = 0; i < rentals.length; i++){
   for (var j = 0; j < cars.length; j++){
     if(rentals[i].id == car[j].id){
+      var commission = (rentals[i].price * 0.3)
       for(var k = 0; k<rentals[i].commission.length;k++){
-        if(rentals[i].commission[insurance] == )
+        if(k == 0){
+          rentals[i].commission[k] = 0.5 * commission
+          commission = commission - rentals[i].commission[k]
+        }
+        if(k == 1){
+          rentals[i].commission[k] =  1 * (rentals[i].returnDate - rentals[i].pickupDate)
+          commission = commission - rentals[i].commission[k]
+        }
+        if(k == 2){
+          rentals[i].commission[k] = commission
+        }
 
 
       }
 
-      rentals[i].commission[k] = rentals[i].price * 0.3
-      rentals[i].insurance = 0.5 * rentals[i].commission
-      rentals[i].treasury = 1 * (rentals[i].returnDate - rentals[i].pickupDate)
-      rentals[i].virtuo = rentals[i].commission - ( rentals[i].insurance + rentals[i].treasury)
     }
   }
 }
