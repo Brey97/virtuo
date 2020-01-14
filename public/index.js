@@ -3,7 +3,7 @@
 //list of cars
 //useful for ALL 5 steps
 //could be an array of objects that you fetched from api or database
-const cars = [{
+var cars = [{
   'id': 'a9c1b91b-5e3d-4cec-a3cb-ef7eebb4892e',
   'name': 'fiat-500-x',
   'pricePerDay': 36,
@@ -28,7 +28,7 @@ const cars = [{
 //The `price` is updated from step 1 and 2
 //The `commission` is updated from step 3
 //The `options` is useful for step 4
-const rentals = [{
+var rentals = [{
   'id': '893a04a3-e447-41fe-beec-9a6bfff6fdb4',
   'driver': {
     'firstName': 'Roman',
@@ -99,19 +99,19 @@ for (var i = 0; i < rentals.length; i++){
 
 //step2
 
-for each (var rental in rentals){
-  for each (var car in cars){
-    if(rental.carId == car.id){
-      rental.price = (car.pricePerDay * (rental.returnDate - rental.pickupDate)) + (rental.distance * car.pricePerKm)
+for (var i = 0; i < rentals.length; i++){
+  for (var j = 0; j < cars.length; j++){
+    if(rentals[i].id == car[j].id){
+      rentals[i].price = (car[j].pricePerDay * (rentals[i].returnDate - rentals[i].pickupDate)) + (rentals[i].distance * car[j].pricePerKm)
     }
-    if((rental.returnDate - rental.pickupDate)>1 && (rental.returnDate - rental.pickupDate) <4){
-      rental.price = rental.price*0.9
+    if((rentals[i].returnDate - rentals[i].pickupDate)>1 && (rentals[i].returnDate - rentals[i].pickupDate) <4){
+      rentals[i].price = rentals[i].price*0.9
     }
-    if((rental.returnDate - rental.pickupDate)>4 && (rental.returnDate - rental.pickupDate) <10){
-      rental.price = rental.price*0.7
+    if((rentals[i].returnDate - rentals[i].pickupDate)>4 && (rentals[i].returnDate - rentals[i].pickupDate) <10){
+      rentals[i].price = rentals[i].price*0.7
     }
-    if((rental.returnDate - rental.pickupDate)>9){
-      rental.price = rental.price*0.5
+    if((rentals[i].returnDate - rentals[i].pickupDate)>9){
+      rentals[i].price = rentals[i].price*0.5
     }
   }
 
@@ -119,39 +119,58 @@ for each (var rental in rentals){
 
 //step3
 
-for each (var car in cars){
-  for each (var rental in rentals){
-    if(rental.carId == car.id){
-      rental.commission = rental.price * 0.3
-      rental.insurance = 0.5 * rental.commission
-      rental.treasury = 1 * (rental.returnDate - rental.pickupDate)
-      rental.virtuo = rental.commission - ( rental.insurance + rental.treasury)
+for (var i = 0; i < rentals.length; i++){
+  for (var j = 0; j < cars.length; j++){
+    if(rentals[i].id == car[j].id){
+      for(var k = 0; k<rentals[i].commission.length;k++){
+        if(rentals[i].commission[insurance] == )
+
+
+      }
+
+      rentals[i].commission[k] = rentals[i].price * 0.3
+      rentals[i].insurance = 0.5 * rentals[i].commission
+      rentals[i].treasury = 1 * (rentals[i].returnDate - rentals[i].pickupDate)
+      rentals[i].virtuo = rentals[i].commission - ( rentals[i].insurance + rentals[i].treasury)
     }
   }
 }
 
 //step4
 
-for each (var rental in rentals){
-  for each (var car in cars){
-    if(rental.carId == car.id){
-      if(rental.deductibleReduction == true){
-        rental.price = rental.price + ((rental.returnDate - rental.pickupDate)*4)
+for (var i = 0; i < rentals.length; i++){
+  for (var j = 0; j < cars.length; j++){
+    if(rentals[i].id == car[j].id){
+      if(rentals[i].options.deductibleReduction == true){
+        rentals[i].price = rentals[i].price + ((rentals[i].returnDate - rentals[i].pickupDate)*4)
       }
     }
   }
 }
 //step5
-for each (var rental in rentals){
-  for each (var actor in actors){
-    if(actor.rentalId == rental.id){
-      debit = rental.price
-
-      if(rental.deductibleReduction == true){
-        actor.virtuo = rental.virtuo
+for (var i = 0; i < rentals.length; i++){
+  for (var j = 0; j < cars.length; j++){
+    if(actor[i].rentalId == rentals[i].id){
+      if(rentals[i].options.deductibleReduction == true){
+        for(var k = 0; k<actors[i].payment.length;k++){
+          if(actor[i].payment[k].who == driver){
+            actor[i].payment[k].amount = rentals[i].price
+          }
+          if(actor[i].payment[k].who == partner){
+            actor[i].payment[k].amount = rentals[i].price
+          }
+          if(actor[i].payment[k].who == insurance){
+            actor[i].payment[k].amount = rentals[i].price
+          }
+          if(actor[i].payment[k].who == treasury){
+            actor[i].payment[k].amount = rentals[i].price
+          }
+          if(actor[i].payment[k].who == virtuo){
+            actor[i].payment[k].amount = rentals[i].price
+          }
+        }
       }
     }
-
   }
 }
 
@@ -160,7 +179,7 @@ for each (var rental in rentals){
 
 //list of actors for payment
 //useful from step 5
-const actors = [{
+var actors = [{
   'rentalId': '893a04a3-e447-41fe-beec-9a6bfff6fdb4',
   'payment': [{
     'who': 'driver',
